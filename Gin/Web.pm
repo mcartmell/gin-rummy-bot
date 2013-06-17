@@ -249,7 +249,9 @@ sub handle_request {
   $path ||= 'show';
 
   my $handler = $dispatch{$path};
+	print "HTTP/1.0 200 OK\r\n";
   if ( defined $handler ) {
+		print $cgi->header;
     eval { $handler->( $self, $cgi ); };
     if ($@) {
       $self->{error} = $@;
